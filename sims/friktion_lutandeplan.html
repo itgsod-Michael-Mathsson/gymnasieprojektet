@@ -27,7 +27,7 @@
             fallingobject.rotation = rota;
             fallingobject.regX = 40;
             fallingobject.x = 100;
-            fallingobject.y = 510 - Math.tan(rota * Math.PI / 180 ) * 550;
+            fallingobject.y = 550 - Math.tan(rota * Math.PI / 180 ) * 550 - 40 / Math.cos(rota * Math.PI / 180);
             stage.addChild(fallingobject);
 
 
