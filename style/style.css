@@ -2,3 +2,17 @@
     background-color: gold;
     font-size: 19px;
 }
+
+#Canvas{
+    position: relative;
+    background-color: aqua;
+    margin: auto;
+}
+
+#CanvasDiv{
+    position: relative;
+    margin: auto;
+    padding: auto;
+    width: 800px;
+    height: 600px;
+}

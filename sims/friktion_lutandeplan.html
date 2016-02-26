@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+    <script>
+        function init() {
+            var stage = new createjs.Stage("Canvas");
+            var square = new createjs.Shape();
+            square.graphics.beginFill("red").drawRect(0, 0, 1000, 1000);
+            var rota = document.getElementById("play").value;
+            if (rota > 40){
+                alert("the rotation has to be below 41")
+            }
+            square.rotation = rota;
+            square.regX=1000;
+            square.x = 650;
+            square.y = 550;
+            stage.addChild(square);
+
+            var ground = new createjs.Shape();
+            ground.graphics.beginFill("red").drawRect(0, 0, 1000, 200);
+            ground.y = 550;
+            stage.addChild(ground);
+
+            var fallingobject = new createjs.Shape();
+            fallingobject.graphics.beginFill("green").drawRect(0, 0, 40, 40);
+            fallingobject.rotation = rota;
+            fallingobject.regX = 40;
+            fallingobject.x = 100;
+            fallingobject.y = 510 - Math.tan(rota * Math.PI / 180 ) * 550;
+            stage.addChild(fallingobject);
+
+
+            stage.update();
+        }
+        function move() {
+
+        }
+    </script>
+    <link href="../style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <div id="CanvasDiv">
+        <canvas id="Canvas" width="800" height="600">
+        </canvas>
+    </div>
+    <div>
+        <input type="text" id="play"> angle </input>
+        <button onclick="init()">play</button>
+        <button onclick="move()">move</button>
+
+    </div>
 
 </body>
 </html>
