@@ -3,51 +3,118 @@
 <head>
     <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
     <script>
+        var height = 600;
+        var width = 800;
+        var gravity = 9.82;
+        var stage;
+        var slope;
+        var canvas;
+        createjs.Ticker.addEventListener("tick", handleTick);
+        createjs.Ticker.paused = true
+
         function init() {
-            var stage = new createjs.Stage("Canvas");
-            var square = new createjs.Shape();
-            square.graphics.beginFill("red").drawRect(0, 0, 1000, 1000);
-            var rota = document.getElementById("play").value;
-            if (rota > 40){
-                alert("the rotation has to be below 41")
+            load()
+        }
+
+        function load() {
+            canvas = document.getElementById("Canvas");
+            stage = new createjs.Stage(Canvas);
+
+            var angle = 20;
+            if (document.getElementById("angle").value){
+                angle = document.getElementById("angle").value;
             }
-            square.rotation = rota;
-            square.regX=1000;
-            square.x = 650;
-            square.y = 550;
-            stage.addChild(square);
+            else {
+                document.getElementById("angle").value = 20;
+            }
+
+            var my = 0.1;
+            if (document.getElementById("my").value){
+                my = document.getElementById("my").value;
+            }
+            else {
+                document.getElementById("my").value = 0.1;
+            }
+
 
             var ground = new createjs.Shape();
             ground.graphics.beginFill("red").drawRect(0, 0, 1000, 200);
-            ground.y = 550;
+            ground.y = height - 50;
             stage.addChild(ground);
+            slope = new createjs.Shape();
+            slope.graphics.beginFill("red").drawRect(0, 0, 1000, 1000);
+
+
+            slope.rotation = angle;
+            slope.regX=1000;
+            slope.x = width - 150;
+            slope.y = height - 50;
+            stage.addChild(slope);
 
             var fallingobject = new createjs.Shape();
             fallingobject.graphics.beginFill("green").drawRect(0, 0, 40, 40);
-            fallingobject.rotation = rota;
+            fallingobject.rotation = angle;
             fallingobject.regX = 40;
             fallingobject.x = 100;
-            fallingobject.y = 550 - Math.tan(rota * Math.PI / 180 ) * 550 - 40 / Math.cos(rota * Math.PI / 180);
+            fallingobject.y = (slope.y) - Math.tan(angle * Math.PI / 180 ) * (slope.x-fallingobject.x) - 40 / Math.cos(angle * Math.PI / 180);
+            fallingobject.velx = 0;
+            fallingobject.vely = 0;
+
+
+            var acc = (9.82*Math.sin(angle*Math.PI/180)-9.82*my*Math.cos(angle*Math.PI/180))
+            if (acc < 0){
+                acc = 0;
+            }
+            fallingobject.accx = acc * Math.cos(angle*Math.PI/180) * 0.2;
+            fallingobject.accy = acc * Math.sin(angle*Math.PI/180) * 0.2;
+
             stage.addChild(fallingobject);
 
-
-            stage.update();
+            stage.update()
         }
-        function move() {
 
+
+        function play() {
+
+            if (createjs.Ticker.paused){
+                createjs.Ticker.paused = false
+
+            }
+            else {
+                createjs.Ticker.paused = true
+            }
+
+        }
+        function handleTick(event){
+            if (!createjs.Ticker.paused) {
+                fallingobject = stage.getChildAt(2);
+                fallingobject.velx += fallingobject.accx;
+                fallingobject.vely += fallingobject.accy;
+                fallingobject.x += fallingobject.velx;
+                fallingobject.y += fallingobject.vely;
+                if (fallingobject.x > slope.x){
+                    fallingobject.x = slope.x + Math.sin(document.getElementById("angle").value*Math.PI/180)*40;
+                    fallingobject.y = slope.y - 40 * Math.cos(document.getElementById("angle").value * Math.PI / 180);
+
+                    play()
+                }
+            }
+            stage.update();
         }
     </script>
     <link href="../style/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body onload="init()">
     <div id="CanvasDiv">
         <canvas id="Canvas" width="800" height="600">
         </canvas>
     </div>
     <div>
-        <input type="text" id="play"> angle </input>
-        <button onclick="init()">play</button>
-        <button onclick="move()">move</button>
+        <input type="text" id="angle"> angle </input>
+        <input type="text" id="my"> my </input>
+
+        <button onclick="load()">load</button>
+        <button onclick="play()">play</button>
 
     </div>
 
