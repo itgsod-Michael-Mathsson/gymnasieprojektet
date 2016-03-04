@@ -10,13 +10,14 @@
         var slope;
         var canvas;
         createjs.Ticker.addEventListener("tick", handleTick);
-        createjs.Ticker.paused = true
+        createjs.Ticker.paused = true;
 
         function init() {
             load()
         }
 
         function load() {
+            createjs.Ticker.paused = true;
             canvas = document.getElementById("Canvas");
             stage = new createjs.Stage(Canvas);
 
@@ -28,12 +29,12 @@
                 document.getElementById("angle").value = 20;
             }
 
-            var my = 0.1;
+            var my = 0.01;
             if (document.getElementById("my").value){
-                my = document.getElementById("my").value;
+                my = document.getElementById("my").value / 1000.0;
             }
             else {
-                document.getElementById("my").value = 0.1;
+                document.getElementById("my").value = 10;
             }
 
 
@@ -112,7 +113,7 @@
     </div>
     <div>
         <input type="text" id="angle"> angle </input>
-        <input type="text" id="my"> my </input>
+        <input type="text" id="my"> milli my </input>
 
         <button onclick="load()">load</button>
         <button onclick="play()">play</button>
