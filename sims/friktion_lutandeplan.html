@@ -51,8 +51,8 @@
             fallingobject.vely = 0;
 
 
-            var acc = (9.82*Math.sin(angle*Math.PI/180)-9.82*my*Math.cos(angle*Math.PI/180))
-            if (acc < 0){
+            var acc = (9.82*Math.sin(angle*Math.PI/180)-9.82*my*Math.cos(angle*Math.PI/180));
+            if (acc <= 0){
                 alert("won't move");
                 acc = 0;
             }
@@ -90,23 +90,29 @@
     <link href="../style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body onload="init()">
-    <div id="CanvasDiv">
-        <canvas id="Canvas" width="800" height="600">
-        </canvas>
+    <div id="header">
+        Friktion med lutande plan: simulering
     </div>
-    <div id="sidebar">
-        <div>
-            <input type="range" min="0" max="40" value="20" step="1" id="angle" onchange="load()"> </input>
-            <p id="angleText"> Angle = 20</p>
-        </div>
-        <div>
-            <input type="range" min="0" max="800" step="1" value="100" id="my" onchange="load()"> </input>
-            <p id="myText"> m&mu; = 100</p>
-        </div>
 
-        <button onclick="load()">load</button>
-        <button onclick="play()">play</button>
+    <div id="LutandePlanSim">
+        <div id="CanvasDiv">
+            <canvas id="Canvas" width="800" height="600">
+            </canvas>
+        </div>
+        <div id="sidebar">
+            <div>
+                <input type="range" min="0" max="40" value="20" step="1" id="angle" onchange="load()"> </input>
+                <p id="angleText"> Angle = 20</p>
+            </div>
+            <div>
+                <input type="range" min="0" max="800" step="1" value="100" id="my" onchange="load()"> </input>
+                <p id="myText"> m&mu; = 100</p>
+            </div>
 
+            <button onclick="load()">load</button>
+            <button onclick="play()">play</button>
+
+        </div>
     </div>
 
 </body>
