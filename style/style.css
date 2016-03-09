@@ -10,9 +10,18 @@
 }
 
 #CanvasDiv{
-    position: relative;
+    float: left;
     margin: auto;
     padding: auto;
     width: 800px;
     height: 600px;
+}
+
+#sidebar{
+    float: right;
+    margin: auto;
+    width: 300px;
+    height: 600px;
+    border: solid saddlebrown 1px;
+    background-color: sandybrown;
 }

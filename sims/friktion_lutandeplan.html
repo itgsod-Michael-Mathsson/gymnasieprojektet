@@ -21,21 +21,10 @@
             canvas = document.getElementById("Canvas");
             stage = new createjs.Stage(Canvas);
 
-            var angle = 20;
-            if (document.getElementById("angle").value){
-                angle = document.getElementById("angle").value;
-            }
-            else {
-                document.getElementById("angle").value = 20;
-            }
-
-            var my = 0.01;
-            if (document.getElementById("my").value){
-                my = document.getElementById("my").value / 1000.0;
-            }
-            else {
-                document.getElementById("my").value = 10;
-            }
+            var angle = document.getElementById("angle").value;
+            var my = document.getElementById("my").value / 1000;
+            document.getElementById("angleText").innerHTML = "angle = " + angle;
+            document.getElementById("myText").innerHTML = "m&mu; = " + my * 1000;
 
 
             var ground = new createjs.Shape();
@@ -78,13 +67,7 @@
 
         function play() {
 
-            if (createjs.Ticker.paused){
-                createjs.Ticker.paused = false
-
-            }
-            else {
-                createjs.Ticker.paused = true
-            }
+            createjs.Ticker.paused = false
 
         }
         function handleTick(event){
@@ -94,11 +77,11 @@
                 fallingobject.vely += fallingobject.accy;
                 fallingobject.x += fallingobject.velx;
                 fallingobject.y += fallingobject.vely;
-                if (fallingobject.x > slope.x){
+                if (fallingobject.x > slope.x + 40 * Math.sin(document.getElementById("angle").value*Math.PI/180)){
                     fallingobject.x = slope.x + Math.sin(document.getElementById("angle").value*Math.PI/180)*40;
                     fallingobject.y = slope.y - 40 * Math.cos(document.getElementById("angle").value * Math.PI / 180);
 
-                    play()
+                    createjs.Ticker.paused = true
                 }
             }
             stage.update();
@@ -111,9 +94,15 @@
         <canvas id="Canvas" width="800" height="600">
         </canvas>
     </div>
-    <div>
-        <input type="text" id="angle"> angle </input>
-        <input type="text" id="my"> milli my </input>
+    <div id="sidebar">
+        <div>
+            <input type="range" min="0" max="40" value="20" step="1" id="angle" onchange="load()"> </input>
+            <p id="angleText"> Angle = 20</p>
+        </div>
+        <div>
+            <input type="range" min="0" max="800" step="1" value="100" id="my" onchange="load()"> </input>
+            <p id="myText"> m&mu; = 100</p>
+        </div>
 
         <button onclick="load()">load</button>
         <button onclick="play()">play</button>
