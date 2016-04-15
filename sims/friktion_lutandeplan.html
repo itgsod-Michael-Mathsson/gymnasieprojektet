@@ -25,7 +25,7 @@
             var angle = document.getElementById("angle").value;
             var my = document.getElementById("my").value;
             var mass = document.getElementById("mass").value;
-            document.getElementById("massText").innerHTML = "Massan = " + mass + "kg";
+            document.getElementById("massText").innerHTML = "Massan = " + mass + " kg";
             document.getElementById("angleText").innerHTML = "Vinkeln = " + angle + "&deg;";
             document.getElementById("myText").innerHTML = "Friktionskonstanten &mu; = " + my;
 
@@ -72,9 +72,9 @@
             var FF = mass*9.82*my*Math.cos(angle*Math.PI/180);
             var FRes = acc * mass;
 
-            document.getElementById("FF").innerHTML = "Friktionskraft = " + Math.round(FF*100)/100 + "N";
-            document.getElementById("FRes").innerHTML = "Resulterande kraft = " + Math.round(FRes*100)/100 + "N";
-            document.getElementById("ac").innerHTML = "Acceleration = " + Math.round(acc*100)/100 + "m/s&#178;";
+            document.getElementById("FF").innerHTML = "Friktionskraft = " + Math.round(FF*100)/100 + " N";
+            document.getElementById("FRes").innerHTML = "Resulterande kraft = " + Math.round(FRes*100)/100 + " N";
+            document.getElementById("ac").innerHTML = "Acceleration = " + Math.round(acc*100)/100 + " m/s&#178;";
             document.getElementById("m/s").innerHTML = "Hastighet = 0 m/s" ;
 
 
