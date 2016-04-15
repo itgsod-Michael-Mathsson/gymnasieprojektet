@@ -30,19 +30,61 @@
     float: left;
     width: 800px;
     height: 600px;
+    border-right: none;
+    border-left: solid saddlebrown 1px;
+    border-bottom: solid saddlebrown 1px;
+    border-top: solid saddlebrown 1px;
 }
 
 #sidebar{
     position: relative;
     float: left;
-    width: 300px;
-    height: 600px;
+    width: 280px;
+    height: 580px;
     border: solid saddlebrown 1px;
     background-color: sandybrown;
+    padding: 10px;
+}
+
+#sidebar button{
+    margin-top: 10px;
 }
 
 #sidebar input{
     width: 200px;
     margin: auto;
     margin-left: 50px;
+}
+
+#WontMoveWarning{
+    position: relative;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 40px;
+    padding: auto;
+    text-align: center;
+    color: red;
+    border: solid 2px #cc0000;
+}
+#WarningPlaceholder{
+    position: relative;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 40px;
+    padding: auto;
+
+    border: solid 2px sandybrown;
+}
+
+
+#stats{
+    margin-top: 80px;
+}
+
+#stats div{
+    margin-top: 20px;
 }
